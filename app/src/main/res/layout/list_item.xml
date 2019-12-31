@@ -18,41 +18,38 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_6"
-            android:layout_marginTop="@dimen/dimen_sp_21"
-            android:layout_marginRight="@dimen/dimen_6"
-            android:layout_marginBottom="@dimen/dimen_6">
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_5"
+            >
 
 
             <ImageView
                 android:id="@+id/ivAvatarImage"
-                android:layout_width="@dimen/course_list_size"
-                android:layout_height="@dimen/course_list_size"
-                android:layout_marginTop="@dimen/dimen_14"
+                android:layout_width="@dimen/list_img_size"
+                android:layout_height="@dimen/list_img_size"
                 android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_avatar"
                 android:layout_marginRight="@dimen/dimen_14" />
 
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_3"
                 android:layout_toRightOf="@+id/ivAvatarImage"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/colorPrimary"
-                android:layout_margin="@dimen/dimen_10"
                 android:textSize="@dimen/text_size_18sp"
                 android:textStyle="normal"
+                android:layout_margin="@dimen/dimen_10"
                 tools:text="NAME" />
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvName"
-                android:layout_marginTop="@dimen/dimen_3"
+                android:layout_margin="@dimen/dimen_10"
                 android:layout_toRightOf="@+id/ivAvatarImage"
                 android:fontFamily="sans-serif"
-                android:layout_margin="@dimen/dimen_10"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_18sp"
                 android:textStyle="normal"

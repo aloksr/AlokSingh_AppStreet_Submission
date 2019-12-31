@@ -94,7 +94,7 @@
     <dimen name="pre_boarding_course_listing_banner_height">140dp</dimen>
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="pre_boarding_bottom_bar_height">52dp</dimen>
-    <dimen name="course_list_size">100dp</dimen>
+    <dimen name="list_img_size">100dp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_9">9sp</dimen>

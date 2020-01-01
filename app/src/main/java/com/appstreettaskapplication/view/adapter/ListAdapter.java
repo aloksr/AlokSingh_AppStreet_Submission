@@ -19,17 +19,17 @@ import com.appstreettaskapplication.model.ListResponseModel;
 import com.appstreettaskapplication.view.callbacks.OnItemCLickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<ListResponseModel> listModels;
+    private List<ListResponseModel> listModels;
     private OnItemCLickListener mListener;
     private ImagesCache cache;
 
-    public ListAdapter(Context context, ArrayList<ListResponseModel> articles) {
+    public ListAdapter(Context context) {
         this.context = context;
-        this.listModels = articles;
         cache = ImagesCache.getInstance();
         cache.initializeCache();
     }
@@ -37,6 +37,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void setOnItemClickListener(OnItemCLickListener listener) {
         mListener = listener;
 
+    }
+
+    public  void setData(List<ListResponseModel> articles){
+        this.listModels = articles;
+        notifyDataSetChanged();
     }
 
     public ListResponseModel getItemAt(int pos) {
@@ -66,16 +71,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvName;
-        TextView tvUserName;
-        ImageView ivAvatarImage;
+        private TextView tvName;
+        private TextView tvUserName;
+        private ImageView ivAvatarImage;
+        private View item_container;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivAvatarImage = itemView.findViewById(R.id.ivAvatarImage);
             tvName = itemView.findViewById(R.id.tvName);
             tvUserName = itemView.findViewById(R.id.tvUserName);
-            itemView.setOnClickListener(this);
+            item_container = itemView.findViewById(R.id.item_container);
+            item_container.setOnClickListener(this);
 
         }
 

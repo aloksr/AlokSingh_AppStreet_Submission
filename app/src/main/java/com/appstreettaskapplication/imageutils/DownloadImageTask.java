@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.appstreettaskapplication.R;
 import com.appstreettaskapplication.view.adapter.ListAdapter;
 
 import java.io.InputStream;

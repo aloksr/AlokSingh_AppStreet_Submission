@@ -18,7 +18,6 @@ import com.appstreettaskapplication.imageutils.ImagesCache;
 import com.appstreettaskapplication.model.ListResponseModel;
 import com.appstreettaskapplication.view.callbacks.OnItemCLickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -39,7 +38,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     }
 
-    public  void setData(List<ListResponseModel> articles){
+    public void setData(List<ListResponseModel> articles){
         this.listModels = articles;
         notifyDataSetChanged();
     }
@@ -66,7 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return listModels==null ? 0 : listModels.size();
+        return listModels == null ? 0 : listModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

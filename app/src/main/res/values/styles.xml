@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardViewStyle">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginRight">@dimen/dimen_10</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_5</item>
+        <item name="android:layout_marginTop">@dimen/dimen_5</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_10</item>
+
+    </style>
+
 </resources>

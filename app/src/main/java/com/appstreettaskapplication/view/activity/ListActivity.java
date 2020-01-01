@@ -1,43 +1,46 @@
 package com.appstreettaskapplication.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.appstreettaskapplication.R;
+import com.appstreettaskapplication.constants.AppConstants;
 import com.appstreettaskapplication.model.ListResponseModel;
 import com.appstreettaskapplication.view.adapter.ListAdapter;
 import com.appstreettaskapplication.view.callbacks.OnItemCLickListener;
 import com.appstreettaskapplication.viewmodels.ListViewModel;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity implements OnItemCLickListener {
-    ArrayList<ListResponseModel> listModels = new ArrayList<>();
-    ListAdapter listAdapter;
-    RecyclerView rvHeadline;
-    ListViewModel listViewModel;
+    private ListAdapter listAdapter;
+    private ShimmerRecyclerView rvList;
+    private ListViewModel listViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        rvHeadline = findViewById(R.id.rvList);
+        rvList = findViewById(R.id.rvList);
 
         listViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
         listViewModel.init();
         listViewModel.getListRepository().observe(ListActivity.this, new Observer<List<ListResponseModel>>() {
             @Override
             public void onChanged(List<ListResponseModel> listResponseModels) {
-                listModels.addAll(listResponseModels);
-                listAdapter.notifyDataSetChanged();
+                if(listResponseModels!= null && listResponseModels.size() > 0) {
+                    listAdapter.setData(listResponseModels);
+                    rvList.hideShimmerAdapter();
+                }
             }
         });
         setupRecyclerView();
@@ -45,12 +48,13 @@ public class ListActivity extends AppCompatActivity implements OnItemCLickListen
 
     private void setupRecyclerView() {
         if (listAdapter == null) {
-            listAdapter = new ListAdapter(ListActivity.this, listModels);
-            rvHeadline.setLayoutManager(new LinearLayoutManager(this));
+            listAdapter = new ListAdapter(ListActivity.this);
+            rvList.setLayoutManager(new LinearLayoutManager(this));
             listAdapter.setOnItemClickListener(this);
-            rvHeadline.setAdapter(listAdapter);
-            rvHeadline.setItemAnimator(new DefaultItemAnimator());
-            rvHeadline.setNestedScrollingEnabled(true);
+            rvList.setAdapter(listAdapter);
+            rvList.showShimmerAdapter();
+            rvList.setItemAnimator(new DefaultItemAnimator());
+            rvList.setNestedScrollingEnabled(true);
         } else {
             listAdapter.notifyDataSetChanged();
         }
@@ -63,8 +67,17 @@ public class ListActivity extends AppCompatActivity implements OnItemCLickListen
         }
     }
 
-    private void navigateToDetaiPage(ListResponseModel itemAt) {
-
-
+    private void navigateToDetaiPage(ListResponseModel itemData) {
+        Intent intent = new Intent(this, DetailPageActivity.class);
+        // Get the transition name from the string
+        intent.putExtra(AppConstants.LIST_DATA, itemData);
+        String transitionName = getString(R.string.app_name);
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                        rvList,   // Starting view
+                        transitionName    // The String
+                );
+        //Start the Intent
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }

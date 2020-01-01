@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_item"
+    style="@style/CardViewStyle"
+    app:cardCornerRadius="@dimen/dimen_5"
+    app:cardElevation="@dimen/dimen_5"
+    android:padding="@dimen/dimen_16"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/imgContentType"
+            android:layout_width="@dimen/dimen_dp_65"
+            android:layout_height="@dimen/dimen_dp_65"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:background="@color/circle_bg_color" />
+
+        <View
+            android:id="@+id/txvUserName"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="@dimen/dimen_10"
+            android:layout_toRightOf="@id/imgContentType"
+            android:background="@color/skeleton_bg_color" />
+
+        <View
+            android:id="@+id/txvUserDesignation"
+            android:layout_width="150dp"
+            android:layout_height="10dp"
+            android:layout_below="@id/txvUserName"
+            android:layout_margin="@dimen/dimen_10"
+            android:layout_toRightOf="@id/imgContentType"
+            android:background="@color/skeleton_bg_color"
+            android:textColor="@color/skeleton_bg_color"
+            />
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

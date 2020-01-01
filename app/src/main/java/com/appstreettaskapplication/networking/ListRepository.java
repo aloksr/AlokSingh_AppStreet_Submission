@@ -12,25 +12,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListRepository {
-
     private static ListRepository listRepository;
+    private ApiService apiInterface;
 
-    public static ListRepository getInstance(){
+    public static synchronized ListRepository getInstance(){
         if (listRepository == null){
             listRepository = new ListRepository();
         }
         return listRepository;
     }
 
-    private NewsApi newsApi;
 
     public ListRepository(){
-        newsApi = RetrofitService.cteateService(NewsApi.class);
+        apiInterface = RetrofitService.cteateService(ApiService.class);
     }
 
     public MutableLiveData<List<ListResponseModel>> getList(String source, String key){
         final MutableLiveData<List<ListResponseModel>> newsData = new MutableLiveData<>();
-        newsApi.getRepositoryList(source,key).enqueue(new Callback<List<ListResponseModel>>() {
+        apiInterface.getRepositoryList(source,key).enqueue(new Callback<List<ListResponseModel>>() {
             @Override
             public void onResponse(Call<List<ListResponseModel>> call, Response<List<ListResponseModel>> response) {
                 if (response.isSuccessful()){
@@ -41,6 +40,7 @@ public class ListRepository {
             @Override
             public void onFailure(Call<List<ListResponseModel>> call, Throwable t) {
                 newsData.setValue(null);
+                t.printStackTrace();
             }
         });
         return newsData;

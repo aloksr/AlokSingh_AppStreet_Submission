@@ -1,18 +1,32 @@
 package com.appstreettaskapplication.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-public class RepoModel {
-    @SerializedName("name")
-    @Expose
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class RepoModel implements Parcelable {
     private String name;
-    @SerializedName("description")
-    @Expose
     private String description;
-    @SerializedName("url")
-    @Expose
+
     private String url;
+
+    protected RepoModel(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        url = in.readString();
+    }
+
+    public static final Creator<RepoModel> CREATOR = new Creator<RepoModel>() {
+        @Override
+        public RepoModel createFromParcel(Parcel in) {
+            return new RepoModel(in);
+        }
+
+        @Override
+        public RepoModel[] newArray(int size) {
+            return new RepoModel[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -36,5 +50,17 @@ public class RepoModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(url);
     }
 }
